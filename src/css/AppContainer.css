@@ -1,0 +1,26 @@
+body{
+	margin:0;
+	padding:0;
+	width: 100%;
+}
+
+header { 
+	width: 100%; 
+	text-align: center;
+    border-bottom: 1px solid #ccc;
+	background: #efefef; 
+	padding: 10px 0px; 
+	font-size: 22px; 
+	line-height: 30px; 
+	z-index: 0;
+}
+
+#routeContent{
+	background: #f9f7f7;
+	height: calc(100vh - 51px);
+}
+
+#main{
+	transition: 0.5s;
+    position: relative;
+}
