@@ -57,7 +57,7 @@ export class Login extends Component {
           </tbody>
         </table>
       </div>
-    );
+    )
   }
 }
 
