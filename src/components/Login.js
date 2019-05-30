@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import '.././css/Login.css';
 import axios from 'axios';
+import { Container, Row, Col, Form, Button, Input } from 'reactstrap';
 
 export class Login extends Component {
   constructor(props){
@@ -11,8 +12,9 @@ export class Login extends Component {
     this.Login = this.Login.bind(this);
   }
 
-  Login = () => {
-    axios.post("http://localhost:1330/authenticate", {"username":this.state.username, "password": this.state.password}).then((res, error) => {
+  Login = (e) => {        
+    e.preventDefault();
+    axios.post(global.config.apiUrl+"/authenticate", {"username":this.state.username, "password": this.state.password}).then((res, error) => {
     console.log(error+'-'+res);  
     if(!error){
         this.props.history.push('home');
@@ -29,33 +31,33 @@ export class Login extends Component {
   }
 
   render() {
-    return (
-      <div id="loginContent">
-        <table>
-          <tbody>
-            <tr>
-              <td colSpan="2" className="centerAlign">Login</td>
-            </tr>
-            <tr>
-              <td>Username</td>
-              <td><input type="text" value={this.state.username} onChange={(e) => {this.handleChange(e, "username")}} /></td>
-            </tr>
-            <tr>
-              <td>Password</td>
-              <td><input type="password" value={this.state.password} onChange={(e) => {this.handleChange(e, "password")}} /></td>
-            </tr>
-            <tr>
-              <td colSpan="2" className="centerAlign">
-                <button type="submit" onClick={this.Login}>Submit</button>
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="2" className="centerAlign">
-                <label>{this.state.error}</label>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    return (     
+      <div className="vertical-center">
+        <Container>
+          <Form onSubmit={this.Login}>
+            <Row className="mb-2 justify-content-md-center justify-content-lg-center">
+              <Col xs="3" sm="2" lg="1">
+                Username
+              </Col>
+              <Col xs="9" sm="5" lg="4">
+                <Input type="text" value={this.state.username} onChange={(e) => {this.handleChange(e, "username")}} />
+              </Col>
+            </Row>
+            <Row className="mb-2 justify-content-md-center justify-content-lg-center">
+              <Col xs="3" sm="2" lg="1">
+                Password
+              </Col>
+              <Col xs="9" sm="5" lg="4">
+                <Input type="password" value={this.state.password} onChange={(e) => {this.handleChange(e, "password")}} />
+              </Col>
+            </Row>
+            <Row className="justify-content-md-center justify-content-lg-center">
+              <Col xs="12" sm="5" lg="4" className="text-center">
+                <Button outline color="primary" size="md" type="submit">Login</Button>
+              </Col>
+            </Row>
+          </Form>
+        </Container>
       </div>
     )
   }

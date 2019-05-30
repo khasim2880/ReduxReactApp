@@ -13,7 +13,7 @@
 #menuEvent{
 	position: absolute;
     z-index: 2;
-    margin: 7px 10px;
+    margin: 10px 10px;
     cursor: pointer;
 }
 
