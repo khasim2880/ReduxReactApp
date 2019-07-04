@@ -1,0 +1,56 @@
+.chat-container{
+    float: right;
+    right: 0;
+    bottom: 10px;
+    position: absolute;
+    margin-right: 5px;
+}
+
+.chatMain{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px 0;
+    padding-right: 25px;
+}
+
+#chatText{
+    height:40px;
+}
+
+.chatHistory{
+    max-height: 350px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.online{
+    background: green;
+    width:10px;
+    height: 10px;
+    border-radius: 4px;
+    border: 1px solid white;
+    display: inline-block;
+    margin-top: 7px;
+    float: right;
+}
+
+.offline{
+    width:10px;
+    height: 10px;
+    border-radius: 4px;
+    border: 1px solid black;
+    display: inline-block;
+    margin-top: 7px;
+    float: right;
+}
+
+.hoverEffect:hover{
+    background:#ccc;
+    cursor: pointer;
+}
+
+.chatClose{
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+}

@@ -4,6 +4,69 @@ This will help to manage the state tree or object of the entire application.
 view(react.js)-->dispatch action-->reducer(will check for state change)-->
 store-->subscribe-->view
 
+Run Command: npm start 
+
+Jest and Enzyme
+-----------------
+  "scripts": {
+    "test": "jest",
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.0.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest": "^24.8.0",
+    "react-test-renderer": "^16.8.6"
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["./src/unittesting/setupTests.js"]
+  }
+
+  setupTests.js
+  -------------
+  import Adapter from 'enzyme-adapter-react-16';
+  import { configure } from 'enzyme';
+  configure({adapter: new Adapter()});
+
+  .babelrc
+  ----------
+  {
+    "presets": ["@babel/env", "@babel/react"]
+  }
+
+  App.test.js
+  -----------
+    jest - test runner
+    ------------------
+    describe('Examining the syntax of Jest tests', () => {
+      it('sums numbers', () => {
+        expect(1 + 2).toEqual(3);
+        expect(2 + 2).toEqual(4);
+      });
+    });
+
+    enzyme - works only for react
+    ----------------------------
+    import React from 'react';
+    import { shallow } from 'enzyme';
+    import Home from './components/Home';
+
+    describe('First React component test with Enzyme', () => {
+      it('renders without crashing', () => {
+          shallow(<Home />);
+        });
+    });
+
+npm test
+
+https://css-tricks.com/writing-tests-for-react-applications-using-jest-and-enzyme/
+
+https://jestjs.io/docs/en/tutorial-async
+
+https://binarapps.com/blog/test-ajax-calls-in-react-component-lifecycle/     ---  Good resource
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

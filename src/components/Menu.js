@@ -18,14 +18,18 @@ export class Menu extends Component {
   }
 
   componentDidMount() {
-    axios.get(global.config.apiUrl+'/categories')
-      .then(res => {
-        const categories = res.data;
-        this.setState({ categories });
-        this.props.getCategoriesEvent({categories});
-      }).catch(err => {
-        window.location.assign("/login");
-      });
+    return new Promise(resolve => {
+      axios.get(global.config.apiUrl+'/categories')
+        .then(res => {
+          const categories = res.data;
+          this.setState({ categories });
+          this.props.getCategoriesEvent({categories});
+          resolve(true);
+        }).catch(err => {
+          resolve(false);
+          window.location.assign("/login");
+        });
+    });
   }
 
   openMenu(){

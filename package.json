@@ -12,12 +12,36 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "reactstrap": "^8.0.0",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "socket.io-client": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest": "^24.8.0",
+    "jest-transform-css": "^2.0.0",
+    "react-test-renderer": "^16.8.6",
+    "sinon": "^7.3.2"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./src/unittesting/setupTests.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
+    }
   }
 }
