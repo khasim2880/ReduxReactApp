@@ -23,7 +23,7 @@ import React, {
   
     getProduct = () => {
       const { match: { params } } = this.props;
-      axios.post(global.config.apiUrl + "/product", {id: params.productId}).then((res) => {
+      axios.post(global.config.apiUrl + "/prod/product", {id: params.productId}).then((res) => {
         const product = res.data;
         this.setState({product});
         this.props.getProductEvent({product});

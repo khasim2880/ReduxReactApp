@@ -23,7 +23,7 @@ class Plp extends Component {
 
   getProducts = () => {
     const { match: { params } } = this.props;
-    axios.post(global.config.apiUrl + "/products", {category: params.catId}).then((res) => {
+    axios.post(global.config.apiUrl + "/prod/products", {category: params.catId}).then((res) => {
       const products = res.data;
       this.setState({products});
       this.props.getProductsEvent({products});
