@@ -2,7 +2,7 @@ import React, {
   Component,
 } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col } from 'reactstrap';
 import logo from '../images/logo.png';
@@ -37,18 +37,12 @@ class Plp extends Component {
     return (
       <Container>
         <Row>
-          <Col xs="6" sm="4" lg="3">
-            <img alt="gem" id="productImage" src={logo} />
-          </Col>
-          <Col xs="6" sm="4" lg="3">
-            <img alt="gem" id="productImage" src={logo} />
-          </Col>
-          <Col xs="6" sm="4" lg="3">
-            <img alt="gem" id="productImage" src={logo} />
-          </Col>
-          <Col xs="6" sm="4" lg="3">
-            <img alt="gem" id="productImage" src={logo} />
-          </Col>
+          {this.state.products.length > 0 && this.state.products.map((obj, key)=>(
+            <Col key={obj._id} xs="6" sm="4" lg="3">
+              <Link to={'/pdp/'+obj.id}><img alt="gem" id="productImage" src={logo} /></Link>
+            </Col>
+          ))
+        }
         </Row>
       </Container>
     )

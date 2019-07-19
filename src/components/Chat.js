@@ -20,7 +20,7 @@ export class Chat extends Component {
   
     PostMessage = (e) => {
       e.preventDefault();
-      axios.post(global.config.apiUrl+"/messages/save", {"fromName":global.config.name, "toName":this.state.userConnected, "message": this.state.message}).then((res, error) => {
+      axios.post(global.config.apiUrl+"/messages/save", {"fromName":global.config.name, "toName":this.state.userConnected, "message": (this.state.message).trim()}).then((res, error) => {
         if(!error){
           socket.emit("chat", {message: this.state.message, toName: this.state.userConnected, fromName: global.config.name});
           this.setState({message: ""});
@@ -105,7 +105,7 @@ export class Chat extends Component {
         }
     }
 
-    joinSocket = () =>{
+    joinSocket = () => {
         //Join the server or socket as client
         socket.emit('join', {name: global.config.name});
         //this.deleteAllMessages();
@@ -114,11 +114,18 @@ export class Chat extends Component {
     socketMethods = () => {
         //receive messages send recently from server
         if(socket.listeners("received").length === 0){
+            console.log('socket recieved method initialized...!');
             socket.on("received", data => {
                 //this.state.AllMessages.push(data);
                 var allmsgs = this.state.AllMessages;
                 allmsgs.push(data);
                 this.setState({AllMessages: allmsgs});
+                if(!this.state.chatOpen && this.state.userConnected !== data.fromName){
+                    this.openChatWindow();
+                    this.onlineUser({name: data.fromName});
+                } else if(this.state.chatOpen && global.config.name === data.toName){
+                    this.onlineUser({name: data.fromName});
+                }
             });
         }
 
@@ -131,7 +138,7 @@ export class Chat extends Component {
                 }
             });
             socket.on("notifyTyping", data  => {
-                if(document.getElementById("typingText")){
+                if(document.getElementById("typingText") && this.state.userConnected === data.fromName){
                     document.getElementById("typingText").innerText  =  data.fromName  +  "  "  +  data.message;
                 }
             });
@@ -142,13 +149,16 @@ export class Chat extends Component {
                 }, 2000);
             });
             socket.on("notifyStopTyping", () =>  {
-                document.getElementById("typingText").innerText  =  "";  
+                if(document.getElementById("typingText")){
+                    document.getElementById("typingText").innerText  =  "";  
+                }
             }); 
         }          
     }
 
     componentDidMount(){
         this.GetAllUsers();
+        this.socketMethods();
     }
 
     render() {
@@ -158,7 +168,7 @@ export class Chat extends Component {
                 <img alt="chat" src={ChatIcon} width= "80px" onClick={this.openChatWindow} />
             </div>
             {this.state.chatOpen &&
-                <Container className="chatMain">
+                <Container className={this.state.userConnected ? 'chatMain chatbg' : 'chatMain'}>
                     {!this.state.userConnected && 
                         <ListGroup>
                             {this.state.AllUsers.length > 0 && this.state.AllUsers.map((obj, index)=>(
@@ -178,16 +188,12 @@ export class Chat extends Component {
                     }
                     {this.state.userConnected && 
                         <Container>
+                            <span className="chatName">Chat With {this.state.userConnected}</span>
                             <span className="chatClose" onClick={() => {this.onlineUser()}}>X</span>
                             <Container className="chatHistory">
                                 {this.state.AllMessages.length > 0 && this.state.AllMessages.map((obj, index)=>(
                                     <Row key={index}>
-                                        <Col xs="4">
-                                            {global.config.name === obj.fromName ? "Me" : (this.state.userConnected === obj.toName ? "Me" : obj.fromName)}
-                                        </Col>
-                                        <Col xs="8">
-                                            {obj.message}
-                                        </Col>
+                                        {global.config.name === obj.fromName ? <Col className="me text-right" xs="12">{obj.message}</Col> : (this.state.userConnected === obj.toName ? <Col className="me text-right" xs="12">{obj.message}</Col> : <Col className="other text-left" xs="12">{obj.message}</Col>)}
                                     </Row>
                                 ))
                                 }

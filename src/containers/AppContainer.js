@@ -6,6 +6,7 @@ import Login from '.././components/Login';
 import Home from '.././components/Home';
 import Register from '.././components/Register';
 import Plp from '.././components/Plp';
+import Pdp from '.././components/Pdp';
 import Menu from '.././components/Menu';
 import logo from '../images/logo2.png';
 import accountLogo from '../images/account.png';
@@ -115,6 +116,7 @@ class App extends Component {
                   <Route exact path='/home' component={Home} key={this.props.location.pathname} />
                   <Route exact path='/signup' component={Register} key={this.props.location.pathname} />
                   <Route component={Plp} path='/plp/:catId' key={this.props.location.pathname} />
+                  <Route component={Pdp} path='/pdp/:productId' key={this.props.location.pathname} />
               </Switch>
               <div>
                 {currentPath === '/login' || currentPath === '/' ? null : <Chat />}

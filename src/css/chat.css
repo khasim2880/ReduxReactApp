@@ -53,4 +53,56 @@
     float: right;
     font-weight: bold;
     cursor: pointer;
+    color: #ccc;
 }
+
+.chatName{
+    font-weight: bold;
+    text-decoration: underline;
+    color: #CCC;
+}
+
+.chatbg{
+    background-image: url('../images/chat_bg.jpg');
+    background-size: cover;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.me{
+    background: rgba(104, 207, 95, 0.863);
+    border-radius: 3px;
+    margin-bottom: 2px;
+}
+
+.other{
+    background: rgb(245, 241, 241);
+    border-radius: 3px;
+    margin-bottom: 2px;
+}
+
+/* .chatArrow{
+    width: 15px;
+    height: 15px;
+    border-right: solid 15px rgba(200, 30, 53, 0.966);
+    border-bottom: solid 15px transparent;
+    border-top: solid 0px transparent;
+} */
